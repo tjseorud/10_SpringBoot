@@ -1,0 +1,11 @@
+spring:
+ application:
+  name: start
+ datasource:
+  driver-class-name: oracle.jdbc.driver.OracleDriver
+  url: jdbc:oracle:thin:@192.168.130.17:1521:XE
+  username: KH14_SDK
+  password: KH1234
+
+server: 
+ port: 80
