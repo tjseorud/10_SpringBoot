@@ -9,14 +9,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kh.start.member.model.dto.MemberDTO;
 import com.kh.start.member.model.service.MemberService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("members")
+@RequestMapping("/members")
 @RequiredArgsConstructor
-public class memberController {
+public class MemberController {
 	
 	private final MemberService memberService;
 	/*
@@ -41,9 +42,10 @@ public class memberController {
 	 */
 	
 	@PostMapping
-	public ResponseEntity<?> signUp(@RequestBody MemberDTO member) {
+	public ResponseEntity<?> signUp(@RequestBody @Valid MemberDTO member) {
 //		log.info("CT : {}",member);
 		memberService.signUp(member);
+		
 		return ResponseEntity.status(201).build();
 	}
 	
