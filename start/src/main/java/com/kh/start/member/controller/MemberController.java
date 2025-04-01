@@ -6,12 +6,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kh.start.member.model.dto.ChangePasswordDTO;
 import com.kh.start.member.model.dto.MemberDTO;
 import com.kh.start.member.model.service.MemberService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 @Slf4j
 @RestController
@@ -49,5 +53,18 @@ public class MemberController {
 		return ResponseEntity.status(201).build();
 	}
 	
+	/*
+	 * 현재 비밀번호 :
+	 * 새 비밀번호 :
+	 * 새 비밀번호 확인 :
+	 */
+	//PW 변경 기능구현
+	@PutMapping
+	public ResponseEntity<?> changePassword(@RequestBody @Valid ChangePasswordDTO passwordEntity) {
+		log.info("비번비번 {}",passwordEntity);
+		
+		
+		return null;
+	}
 	
 }

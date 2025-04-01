@@ -1,6 +1,7 @@
 HELP.md
 
 *.metadata
+*application-private*
 
 .gradle
 build/

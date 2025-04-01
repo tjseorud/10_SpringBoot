@@ -1,5 +1,7 @@
 package com.kh.start.auth.controller;
 
+import java.util.Map;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
-@RequestMapping("/auth")
+@RequestMapping("auth")
 @RequiredArgsConstructor
 public class AuthController {
 	
@@ -23,7 +25,9 @@ public class AuthController {
 	
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@Valid @RequestBody MemberDTO member) {
-		authService.login(member);
-		return null;
+		Map<String, String> loginResponse = authService.login(member);
+		log.info("자격증명된 사용자 정보 옴? {}",loginResponse);
+		
+		return ResponseEntity.ok(loginResponse);
 	}
 }

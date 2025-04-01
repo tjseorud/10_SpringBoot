@@ -10,6 +10,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.kh.start.exception.CustomAuthenticationException;
 import com.kh.start.exception.MemberIdDuplicateException;
 
 import lombok.extern.slf4j.Slf4j;
@@ -21,9 +22,14 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(MemberIdDuplicateException.class)
 	public ResponseEntity<?> handleDuplicateMemberId(MemberIdDuplicateException e) {
 		Map<String, String> error = new HashMap<>();
-		
-		error.put("이유",e.getMessage());
-		
+		error.put("이유",e.getMessage());		
+		return ResponseEntity.badRequest().body(error);
+	}
+	
+	@ExceptionHandler(CustomAuthenticationException.class)
+	public ResponseEntity<?> handleAuthentication(CustomAuthenticationException e) {
+		Map<String, String> error = new HashMap<>();
+		error.put("이유",e.getMessage());		
 		return ResponseEntity.badRequest().body(error);
 	}
 	
@@ -42,8 +48,7 @@ public class GlobalExceptionHandler {
 		*/
 		e.getBindingResult().getFieldErrors().forEach(error -> 
 			errors.put(error.getField(), error.getDefaultMessage())
-		);
-		
+		);		
 		return ResponseEntity.badRequest().body(errors);
 	}
 	

@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.kh.start.auth.model.vo.CustomUserDetails;
+import com.kh.start.exception.CustomAuthenticationException;
 import com.kh.start.member.model.dao.MemberMapper;
 import com.kh.start.member.model.dto.MemberDTO;
 
@@ -27,7 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		MemberDTO user = mapper.getMemberByMemberId(username);
 		
 		if(user == null) {
-			throw new UsernameNotFoundException("존재하지 않는 사용자입니다.");
+			throw new CustomAuthenticationException("존재하지 않는 사용자입니다.");
 		}
 		
 		return CustomUserDetails.builder()
