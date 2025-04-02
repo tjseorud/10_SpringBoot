@@ -30,8 +30,7 @@ public class SecurityConfigure {
 	
 //	필터체인 정의
 	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-		
+	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {	
 		//return httpSecurity.formLogin().disable().build();	
 		/*
 		return httpSecurity.formLogin(new Customizer<FormLoginConfigurer<HttpSecurity>>() {
@@ -51,7 +50,7 @@ public class SecurityConfigure {
 							.httpBasic(AbstractHttpConfigurer::disable)
 							.csrf(AbstractHttpConfigurer::disable)
 							.authorizeHttpRequests(requests -> {
-								requests.requestMatchers(HttpMethod.POST, "/auth/login", "/members").permitAll();
+								requests.requestMatchers(HttpMethod.POST, "/auth/login", "/auth/refresh", "/members").permitAll();
 								requests.requestMatchers("/admin/**").hasRole("ADMIN");
 								requests.requestMatchers(HttpMethod.PUT,"/members").authenticated();
 								requests.requestMatchers(HttpMethod.DELETE, "/members").authenticated();

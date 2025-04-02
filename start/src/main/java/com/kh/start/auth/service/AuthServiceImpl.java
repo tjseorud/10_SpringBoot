@@ -57,7 +57,7 @@ public class AuthServiceImpl implements AuthService {
 //		String accessToken = jwtUtil.getAccessToken(user.getUsername());
 //		String refreshToken = jwtUtil.getRefreshToken(user.getUsername());		
 		//log.info("\n AccessToken : {},\n RefreshToken : {}",accessToken, refreshToken);
-		Map<String, String> loginResponse = tokenService.generateToken(user.getUsername());
+		Map<String, String> loginResponse = tokenService.generateToken(user.getUsername(), user.getMemberNo());
 		
 		loginResponse.put("memberId", user.getUsername());
 		loginResponse.put("memberName", user.getMemberName());

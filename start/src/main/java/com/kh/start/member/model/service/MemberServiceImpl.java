@@ -82,13 +82,13 @@ public class MemberServiceImpl implements MemberService {
 	
 	private Long passwordMatches(String password) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		CustomUserDetails userDetails = (CustomUserDetails)auth.getPrincipal();
+		CustomUserDetails user = (CustomUserDetails)auth.getPrincipal();
 		
-		if( !passwordEncoder.matches(password, userDetails.getPassword()) ) {
+		if( !passwordEncoder.matches(password, user.getPassword()) ) {
 			throw new RuntimeException("비밀번호가 일치하지 않습니다!");
 		}
 		
-		return userDetails.getMemberNo();
+		return user.getMemberNo();
 	}
 
 }
