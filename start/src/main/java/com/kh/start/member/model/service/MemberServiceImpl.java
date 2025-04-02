@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.start.auth.model.vo.CustomUserDetails;
 import com.kh.start.exception.MemberIdDuplicateException;
+import com.kh.start.exception.PasswordMisMatchedException;
 import com.kh.start.member.model.dao.MemberMapper;
 import com.kh.start.member.model.dto.ChangePasswordDTO;
 import com.kh.start.member.model.dto.MemberDTO;
@@ -77,7 +78,6 @@ public class MemberServiceImpl implements MemberService {
 		// DELETE FROM TB_BOOT_MEMBER WHERE MEMBER_NO = ?
 		Long memberNo = passwordMatches(password);
 		mapper.deleteByPassword(memberNo);
-		
 	}
 	
 	private Long passwordMatches(String password) {
@@ -85,7 +85,7 @@ public class MemberServiceImpl implements MemberService {
 		CustomUserDetails user = (CustomUserDetails)auth.getPrincipal();
 		
 		if( !passwordEncoder.matches(password, user.getPassword()) ) {
-			throw new RuntimeException("비밀번호가 일치하지 않습니다!");
+			throw new PasswordMisMatchedException("비밀번호가 일치하지 않습니다!");
 		}
 		
 		return user.getMemberNo();

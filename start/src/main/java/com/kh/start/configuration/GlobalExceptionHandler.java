@@ -12,12 +12,28 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.kh.start.exception.CustomAuthenticationException;
 import com.kh.start.exception.MemberIdDuplicateException;
+import com.kh.start.exception.PasswordMisMatchedException;
+import com.kh.start.exception.TokenExpireException;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+	
+	@ExceptionHandler(PasswordMisMatchedException.class)
+	public ResponseEntity<?> handlePasswordMisMatched(PasswordMisMatchedException e) {
+		Map<String, String> error = new HashMap<>();
+		error.put("이유",e.getMessage());		
+		return ResponseEntity.badRequest().body(error);
+	}
+	
+	@ExceptionHandler(TokenExpireException.class)
+	public ResponseEntity<?> handleTokenExpire(TokenExpireException e) {
+		Map<String, String> error = new HashMap<>();
+		error.put("이유",e.getMessage());		
+		return ResponseEntity.badRequest().body(error);
+	}
 	
 	@ExceptionHandler(MemberIdDuplicateException.class)
 	public ResponseEntity<?> handleDuplicateMemberId(MemberIdDuplicateException e) {

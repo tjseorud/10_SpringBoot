@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.kh.start.auth.util.JwtUtil;
+import com.kh.start.exception.TokenExpireException;
 import com.kh.start.token.model.dao.TokenMapper;
 import com.kh.start.token.model.vo.RefreshToken;
 
@@ -69,7 +70,7 @@ public class TokenServiceImpl implements TokenService {
 		// 2. 예외 발생시
 		
 		if(respinseToken == null || token.getExpiration() < System.currentTimeMillis()) {
-			throw new RuntimeException("유효하지 않은 토큰입니다.");
+			throw new TokenExpireException("유효하지 않은 토큰입니다.");
 		}
 		
 		String username = getUsernameByToken(refreshToken);
