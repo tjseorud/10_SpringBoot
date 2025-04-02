@@ -1,14 +1,30 @@
 spring:
- application:
-  name: start
- datasource:
-  driver-class-name: oracle.jdbc.driver.OracleDriver
-  url: jdbc:oracle:thin:@192.168.130.17:1521:XE
-  username: KH14_SDK
-  password: KH1234
- profiles:
-  include: private
+  application:
+    name: start
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@192.168.130.17:1521:XE
+    username: KH14_SDK
+    password: KH1234
+  profiles:
+    include: private
 
 server: 
- port: 80
+  port: 80
  
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+logging:
+  level:
+    org: 
+      apache: 
+        ibatis: DEBUG
+    java:
+      sql: DEBUG
+    jdbc:
+      sqlonly: DEBUG
+      resultset: DEBUG
+      audit: DEBUG
