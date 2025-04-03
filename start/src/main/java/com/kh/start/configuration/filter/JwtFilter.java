@@ -63,9 +63,8 @@ public class JwtFilter extends OncePerRequestFilter {
 			UsernamePasswordAuthenticationToken authenticationToken = 
 				new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 			
-			authenticationToken.setDetails(
-				new WebAuthenticationDetailsSource().buildDetails(request)
-			);	//세부설정 사용자의 IP, MAC주소, sessionID 등등이 포함될 수 있음
+			authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));	
+			//세부설정 사용자의 IP, MAC주소, sessionID 등등이 포함될 수 있음
 			
 			SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 			// session.setAttribute("loginMember","사용자 정보")

@@ -1,20 +1,18 @@
-package com.kh.start.board.model.dto;
+package com.kh.start.board.model.vo;
 
 import java.sql.Date;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Value;
 
-@Getter
-@Setter
-@NoArgsConstructor
+@Value
+@Builder
+@Getter	
 @AllArgsConstructor
-@ToString
-public class BoardDTO {
-
+public class BoardVO {
+	
 	private Long boardNo;
 	private String boardTitle;
 	private String boardContent;
@@ -23,5 +21,4 @@ public class BoardDTO {
 	private String status;
 	private Date createDate;
 	private Date modifyDate;
-
 }

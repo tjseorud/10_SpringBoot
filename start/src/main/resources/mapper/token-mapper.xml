@@ -7,9 +7,11 @@
 	<insert id="saveToken">
 		INSERT 
 		  INTO TB_BOOT_TOKEN
-		VALUES (#{token}
+		VALUES (
+			   #{token}
 			 , #{memberNo}
-			 , #{expiration})
+			 , #{expiration}
+			 )
 	</insert>
 	
 	<delete id="deleteExpiredRefreshToken">
