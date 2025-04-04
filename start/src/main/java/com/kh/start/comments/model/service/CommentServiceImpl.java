@@ -31,7 +31,7 @@ public class CommentServiceImpl implements CommentService {
 		boardService.findById(comment.getRefBoardNo());		
 		// 요거 요청한 사용자랑 토큰 소유주랑 같아?
 		String tokenMemberNo = String.valueOf(((CustomUserDetails)authService.getUserDetails()).getMemberNo());
-		log.info("tokenMemberNo: {}",tokenMemberNo);
+		//log.info("tokenMemberNo: {}",tokenMemberNo);
 		
 		if( !tokenMemberNo.equals(comment.getCommentWriter()) ) {
 			throw new InvalidUserRequestException("누구세요?");

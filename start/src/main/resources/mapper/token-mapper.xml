@@ -11,7 +11,7 @@
 			   #{token}
 			 , #{memberNo}
 			 , #{expiration}
-			 )
+			   )
 	</insert>
 	
 	<delete id="deleteExpiredRefreshToken">
@@ -22,7 +22,7 @@
 	
 	<select id="findByToken">
 		SLELCT TOKEN
-			 , MEMBER_NO AS memberNo
+			 , MEMBER_NO 	AS memberNo
 			 , EXPIRATION
 		  FROM TB_BOOT_TOKEN
 		 WHERE TOKEN = #{token}

@@ -50,20 +50,18 @@ public class GlobalExceptionHandler {
 	}
 	
 	@ExceptionHandler(TokenExpireException.class)
-	public ResponseEntity<Map<String, String>> handleTokenExpire(TokenExpireException e) {
-		return makeResponseEntity(e, HttpStatus.BAD_REQUEST);
+	public ResponseEntity<?> handleTokenExpire(TokenExpireException e) {
+		return makeResponseEntity(e, HttpStatus.BAD_REQUEST);		
 	}
 	
 	@ExceptionHandler(MemberIdDuplicateException.class)
-	public ResponseEntity<Map<String, String>> handleDuplicateMemberId(MemberIdDuplicateException e) {
+	public ResponseEntity<?> handleDuplicateMemberId(MemberIdDuplicateException e) {
 		return makeResponseEntity(e, HttpStatus.BAD_REQUEST);
 	}
 	
 	@ExceptionHandler(CustomAuthenticationException.class)
 	public ResponseEntity<?> handleAuthentication(CustomAuthenticationException e) {
-		Map<String, String> error = new HashMap<>();
-		error.put("error-message",e.getMessage());		
-		return ResponseEntity.badRequest().body(error);
+		return makeResponseEntity(e, HttpStatus.BAD_REQUEST);
 	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
@@ -82,7 +80,7 @@ public class GlobalExceptionHandler {
 		e.getBindingResult().getFieldErrors().forEach(error -> 
 			errors.put(error.getField(), error.getDefaultMessage())
 		);		
-		return ResponseEntity.badRequest().body(errors);
+		return ResponseEntity.badRequest().body(errors);		
 	}
 	
 }
