@@ -13,6 +13,7 @@ import com.kh.start.auth.service.AuthService;
 import com.kh.start.board.model.dao.BoardMapper;
 import com.kh.start.board.model.dto.BoardDTO;
 import com.kh.start.board.model.vo.BoardVO;
+import com.kh.start.exception.NotFindException;
 import com.kh.start.file.service.FileService;
 
 import lombok.RequiredArgsConstructor;
@@ -80,7 +81,7 @@ public class BoardServiceImpl implements BoardService {
 		BoardDTO board = boardMapper.findById(boardNo);
 		
 		if(board == null) {
-			throw new RuntimeException("게시글이 없어유");
+			throw new NotFindException("게시글이 없어유");
 		}
 		return board;
 	}

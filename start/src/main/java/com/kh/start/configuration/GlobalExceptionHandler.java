@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.kh.start.exception.CustomAuthenticationException;
+import com.kh.start.exception.FileUploadException;
 import com.kh.start.exception.InvalidUserRequestException;
 import com.kh.start.exception.MemberIdDuplicateException;
+import com.kh.start.exception.NotFindException;
 import com.kh.start.exception.PasswordMisMatchedException;
 import com.kh.start.exception.TokenExpireException;
 
@@ -29,13 +31,23 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.status(status).body(error);
 	}
 	
+	@ExceptionHandler(FileUploadException.class)
+	public ResponseEntity<Map<String, String>> handleFileUploadError(FileUploadException e) {
+		return makeResponseEntity(e, HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(NotFindException.class)
+	public ResponseEntity<Map<String, String>> handleNotFind(NotFindException e) {
+		return makeResponseEntity(e, HttpStatus.BAD_REQUEST);
+	}
+	
 	@ExceptionHandler(InvalidUserRequestException.class)
 	public ResponseEntity<Map<String, String>> handleInvalidUserError(InvalidUserRequestException e) {
 		/*
 		Map<String, String> error = new HashMap<>();
 		error.put("error-message",e.getMessage());		
 		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
-		*/
+		 */
 		return makeResponseEntity(e, HttpStatus.UNAUTHORIZED);
 	}
 	

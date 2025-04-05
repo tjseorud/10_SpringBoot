@@ -9,6 +9,8 @@ import java.nio.file.StandardCopyOption;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.start.exception.FileUploadException;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -32,7 +34,7 @@ public class FileService {
 			
 			return "http://localhost/uploads/" + originalFileName;
 		}catch (IOException e) {
-			throw new RuntimeException("파일이 이상함");
+			throw new FileUploadException("파일이 이상함");
 		}
 		
 	}
